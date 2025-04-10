@@ -1,0 +1,26 @@
+[
+    Product(
+      id: 'p1',
+      name: 'Red Shirt',
+      price: 29.99,
+
+    ),
+    Product(
+      id: 'p2',
+      name: 'Trousers',
+      price: 59.99,
+
+    ),
+    Product(
+      id: 'p3',
+      name: 'Yellow Scarf',
+      price: 19.99,
+
+    ),
+    Product(
+      id: 'p4',
+      name: 'A Pan',
+      price: 49.99,
+
+    ),
+  ]
