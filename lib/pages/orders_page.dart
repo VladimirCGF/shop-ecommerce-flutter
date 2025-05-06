@@ -34,12 +34,25 @@ class _OrdersPageState extends State<OrdersPage> {
         title: const Text('Meus Pedidos'),
       ),
       drawer: const AppDrawer(),
-      body: _isLoading
-          ? const Center(
-          child: CircularProgressIndicator())
-          : ListView.builder(
-        itemCount: orders.itemsCount,
-        itemBuilder: (ctx, i) => OrderWidget(order: orders.items[i]),
+      body: FutureBuilder(
+        future: Provider.of<OrderList>(
+          context,
+          listen: false,
+        ).loadOrders().then((_) {
+          setState(() => _isLoading = false);
+        }),
+        builder: (ctx, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return Consumer<OrderList>(
+              builder: (ctx, orders, child) => ListView.builder(
+                itemCount: orders.itemsCount,
+                itemBuilder: (ctx, i) => OrderWidget(order: orders.items[i]),
+              ),
+            );
+          }
+        },
       ),
     );
   }
